@@ -1,11 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-import firebase from 'firebase/app'
-
-
+//create a firebase instance
+let firebase = require('firebase');
 
 // Initialize Firebase
   var config = {
@@ -19,8 +13,4 @@ import firebase from 'firebase/app'
 firebase.initializeApp(config);
 
 
-
-
-
-ReactDOM.render(<App />, document.getElementById('root'));
-serviceWorker.register();
+module.exports=firebase;

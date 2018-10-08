@@ -1,0 +1,86 @@
+.imageContainer{
+    width: 250px;
+    height: 270px;
+    background-color: #edf2f9;
+    border-radius: 5px;
+    margin: 4px;
+    float:left;
+    position: relative;
+    border-radius: 5px;
+    text-align: center;
+    color: peru;
+    font-family: "Comic Sans MS", cursive, sans-serif
+   
+}
+.favoriteStoreLink{
+    text-decoration: none;
+}
+
+.favoriteStoreLink:hover{
+    text-decoration:underline;
+   
+}
+
+.favoriteStoreLink:visited{
+    color:peru;
+}
+.img{
+    width: 230px;
+    height: 200px;
+    margin: 10px auto;
+    overflow: hidden;
+    border-radius: 5px;
+}
+.img img{
+    width: 100%;
+    height: 100%;
+     object-fit:cover;
+   
+    border-radius: 5px;
+}
+.ImageHoverPage{
+    visibility: hidden;
+    width: inherit;
+    height: 100%;
+    background-color: rgba(174,176,178,0.8);
+    border-radius: 5px;
+  
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.imageContainer:hover .ImageHoverPage{
+    color: aqua;
+    visibility: visible;
+    cursor: pointer;
+
+}
+
+.saveImg{
+    width: 45px;
+    text-align: center;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.saveImg>img{
+    width: inherit;
+    height: auto;
+   
+    
+}
+
+.linkToCompany{
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    text-decoration: none;
+    font-size: 13px;
+    min-width: 88px;
+    border:1px solid azure;
+    color: purple;
+    padding: 5px 15px;
+    background-color: #e1eaf7;
+    border-radius: 6px;
+}

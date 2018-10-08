@@ -1,0 +1,43 @@
+.main{
+   width: 1600px;
+   min-height: 800px;
+    margin: 38px auto;
+}
+.clearfix{
+    overflow: auto;
+}
+.clearfix::after{
+    clear: both;
+    display: table;
+    content: ""
+}
+
+@media only screen and (max-width:1450px){
+    .main{
+        width: 1300px;
+    }
+}
+
+@media only screen and (max-width:1300px){
+    .main{
+        width: 1040px;
+    }
+}
+
+@media only screen and (max-width:1000px){
+    .main{
+        width: 790px;
+    }
+}
+
+@media only screen and (max-width:790px){
+    .main{
+        width: 530px;
+    }
+}
+
+@media only screen and (max-width:500px){
+    .main{
+        width: 250px;
+    }
+}
