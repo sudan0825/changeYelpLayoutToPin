@@ -20,13 +20,13 @@ class App extends Component {
         }
     }
 
-    //get the search categories
-    getCategories=(e)=>{
+    //get the search stores based on the input value
+    getCategoriesFromDB=(e)=>{
         if(e.key==='Enter'){
-        
 
+            this.setState({showTypeahead:false});
             axios.get('/'+e.target.value+'.json').then((res)=>{
-                
+
                 if(res.data.length===0){
                     this.setState({thevalueTobeRender:"We do not have the category you searched in our database"})
                 }else{
@@ -35,7 +35,7 @@ class App extends Component {
                     for(let i in res.data){
                         datalist=[...datalist, ...res.data[i]];
                     }
-                    
+
                     this.setState({thevalueTobeRender:datalist})
                     console.log(this.state.thevalueTobeRender);
                 }
@@ -44,14 +44,20 @@ class App extends Component {
             })
 
         }
-
+        console.log(this);
 
     }
-    
-    //suggest categories to be input
-    typeahead=(e)=>{
-        if(e.key!=='Enter'){
+
+
+
+    //if mouse leave the search input, hide the drop down menu  
+    bodyClick=(e)=>{
+
+        //hide typeahead if the anywhere other then searchCategory is clicked
+        if(e.target.className==="searchCategory"){
             this.setState({showTypeahead:true});
+
+
             axios.get('/categories.json').then((res)=>{
 
 
@@ -62,43 +68,58 @@ class App extends Component {
                 }
 
             }).catch((e)=>{
+
                 console.log(e)
             })
-        }
 
-    }
 
-    //if mouse leave the search input, hide the drop down menu  
-    bodyClick=(e)=>{
 
-        //hide typeahead if the anywhere other then searchCategory is clicked
-        if(e.target.className==="searchCategory"){
-            this.setState({showTypeahead:true});
         }else {
+
             this.setState({showTypeahead:false});
+
         }
         //if the typeahead is clicked, set the input field value
         if(e.target.className==="categoriesList"){
 
             this.setState({searchInput:e.target.innerHTML,
                            focuseInput:true});
-            
+
+
 
         }
-
+        console.log(this.state.showTypehead)
 
 
     }
     //get the category from drop down list; set it as the input value; retrieve data from backend
-    gettheCategory=(e)=>{
+    onInputchange=(e)=>{
+
+        console.log(e.target.value)
+        this.setState({searchInput:e.target.value})
+        console.log(this);
+        console.log(this.state.searchInput)
+
+    }
+    getSnapshotBeforeUpdate(preprops, prestate){
+        if(prestate!==this.state||preprops!==this.props){
+
+            return this.state
+        }
+        console.log(preprops, prestate)
+        return null
 
     }
 
-    render() {
-        let routes=(
-            <Switch>
-            <Route path="/Home" render={(props)=><GetDataFromYelp thevalueTobeRender={this.state.thevalueTobeRender}/>}/>
-            <Route path="/Favorite" component={Favorite}/>
+componentDidUpdate(preprops, prestate,snapshot){
+    console.log(snapshot)
+}
+
+render() {
+    let routes=(
+        <Switch>
+        <Route path="/Home" render={(props)=><GetDataFromYelp thevalueTobeRender={this.state.thevalueTobeRender}/>}/>
+        <Route path="/Favorite" component={Favorite}/>
             </Switch>
         )
 
@@ -107,23 +128,23 @@ class App extends Component {
         return (
 
             <BrowserRouter>
-            <div className="App" onClick={this.bodyClick}>
+            <div className="App" onClick={(e)=>this.bodyClick(e)}>
 
-            <Topbar getCategories={this.getCategories} 
-            typeahead={this.typeahead}
-            showTypeahead={this.state.showTypeahead}
-            searchInput={this.state.searchInput}
-            categories={this.state.categories}
-            gettheCategory={this.gettheCategory}
-            focuseInput={this.state.focuseInput}/>
-            {routes}
+            <Topbar 
+        getCategories={e=>this.getCategoriesFromDB(e)} 
+        showTypeahead={this.state.showTypeahead}
+        searchInput={this.state.searchInput}
+        categories={this.state.categories}
+        change={e=>this.onInputchange(e)}
+        focuseInput={this.state.focuseInput}/>
+        {routes}
 
 
-            </div>
-            </BrowserRouter>
+</div>
+    </BrowserRouter>
 
-        );
-    }
+);
+}
 }
 
 export default App;

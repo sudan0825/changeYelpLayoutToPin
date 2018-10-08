@@ -5,6 +5,7 @@ import NavigationMenue from './navigation/navigationMenue'
 
 const topBar = (props)=>{
     let categoriesList=[];
+    
 
     if(props.categories.length!==0){
 
@@ -18,13 +19,7 @@ const topBar = (props)=>{
                                 }
 
                                 }
-//   function setfocus(elem){
-//                console.log(elem)
-//      if(props.focuseInput){
-//             elem.autofocus=true
-//      
-//                } 
-//            }
+
 
             return (
 
@@ -33,15 +28,15 @@ const topBar = (props)=>{
                 <div className="logo"><img  src="https://www.hiretual.com/hubfs/Hiretual-Sep-2018/images/hiretual.svg" alt="Hiretual"/></div>
                 <div className="search">
                 <input  
+                name="search"               
                 type="search" 
                 className="searchCategory"
-                name="search" 
                 placeholder="Search..." 
                 onKeyPress={props.getCategories}
-                onFocus={props.typeahead}
                 value={props.searchInput}
-                onChange={props.gettheCategory}
-                autoFocus ={props.focuseInput}/>
+                onChange={props.change}
+                autoFocus={props.focuseInput}
+                 />
                 {props.showTypeahead?<ul className="typehead" >
                 {categoriesList}
                 </ul>:null}
